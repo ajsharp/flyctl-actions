@@ -8,6 +8,8 @@ if [ -n "$FLY_PROJECT_PATH" ]; then
   cd "$FLY_PROJECT_PATH" || exit
 fi
 
+echo "FLY_APP=$FLY_APP"
+
 if [ -n "$FLY_APP" ]; then
   sh -c "FLY_APP=$FLY_APP flyctl $*"
 else
