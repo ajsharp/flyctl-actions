@@ -1,11 +1,18 @@
 #!/bin/sh -l
 
+echo $(env)
+
 if [ -n "$FLY_PROJECT_PATH" ]; then
   PREV_PATH=$(pwd)
   # Allow user to change directories in which to run Fly commands
   cd "$FLY_PROJECT_PATH" || exit
 fi
-sh -c "flyctl $*"
+
+if [ -n "$FLY_APP" ]; then
+  sh -c "FLY_APP=$FLY_APP flyctl $*"
+else
+  sh -c "flyctl $*"
+fi
 
 ACTUAL_EXIT="$?"
 
